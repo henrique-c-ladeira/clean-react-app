@@ -25,3 +25,4 @@ jobs:
           cache: 'npm'
       - run: npm install
       - run: npx jest --passWithNoTests
+      - run: npx tsc --noEmit
