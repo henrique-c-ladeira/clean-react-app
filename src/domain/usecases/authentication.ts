@@ -1,6 +1,6 @@
-import { AccountModel } from '../models/account-model';
+import { AccountModel } from '~/domain/models';
 
-type AuthenticationParams = {
+export type AuthenticationParams = {
   email: string;
   password: string;
 };
