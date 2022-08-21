@@ -1,0 +1,8 @@
+{
+  "name": "refactored-octo-umbrella",
+  "version": "0.0.1",
+  "main": "index.js",
+  "author": "Henrique <henrique.c.ladeira@gmail.com>",
+  "license": "MIT",
+  "private": false
+}
