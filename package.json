@@ -4,5 +4,8 @@
   "main": "index.js",
   "author": "Henrique <henrique.c.ladeira@gmail.com>",
   "license": "MIT",
-  "private": false
+  "private": false,
+  "devDependencies": {
+    "typescript": "^4.7.4"
+  }
 }
