@@ -2,4 +2,4 @@
 
 React app using clean architecture and SOLID principles
 
-###### 🚧 Docs (WIP) 🚧
+###### 🚧🚧 Docs (WIP) 🚧🚧

@@ -1,1 +1,2 @@
-<img src="../docs/architecture.png" width="75%">
+<!-- Architectural Drawing -->
+<img src="../docs/arch.png" width="75%">
