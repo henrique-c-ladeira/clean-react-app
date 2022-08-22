@@ -1,0 +1,1 @@
+<img src="../docs/architecture.png" width="75%">
