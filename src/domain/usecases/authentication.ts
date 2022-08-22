@@ -2,7 +2,7 @@ import { AccountModel } from '~/domain/models';
 
 export type AuthenticationParams = {
   email: string;
-  password: string;
+  passwosrd: string;
 };
 
 export interface Authentication {
