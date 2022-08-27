@@ -6,7 +6,8 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "start": "webpack-dev-server --open",
+    "start": "webpack-dev-server --mode development --open --hot",
+    "prod": "webpack-dev-server --mode production",
     "clean": "rimraf node_modules",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "test": "jest --no-cache --runInBand --watch"
