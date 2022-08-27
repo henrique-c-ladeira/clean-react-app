@@ -1,8 +1,8 @@
 /* eslint-disable no-undef */
 /** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
 module.exports = {
-  roots: ['<rootDir>/src', '!**/*.d.ts'],
-  collectCoverageFrom: ['<rootDir>/src/**/*.{ts,tsx}'],
+  roots: ['<rootDir>/src'],
+  collectCoverageFrom: ['<rootDir>/src/**/*.{ts,tsx}', '!**/*.d.ts'],
   coverageDirectory: 'coverage',
   preset: 'ts-jest',
   testEnvironment: 'node',
