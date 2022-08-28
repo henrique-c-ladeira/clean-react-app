@@ -5,15 +5,31 @@ interface StatusIndicatorProps {
   isSuccess?: boolean;
   isLoading?: boolean;
   isError?: boolean;
+  'data-testid'?: string;
 }
 
 const StatusIndicator: React.FC<StatusIndicatorProps> = (props) => {
+  const testId = props['data-testid']
+    ? props['data-testid']
+    : 'status-indicator';
   if (props.isSuccess)
-    return <Typography data-testid="status-indicator"> Success</Typography>;
+    return (
+      <Typography variant="bodySmall" data-testid={testId}>
+        ✅
+      </Typography>
+    );
   if (props.isLoading)
-    return <Typography data-testid="status-indicator"> Loading...</Typography>;
+    return (
+      <Typography variant="bodySmall" data-testid={testId}>
+        ...
+      </Typography>
+    );
   if (props.isError)
-    return <Typography data-testid="status-indicator"> Error</Typography>;
+    return (
+      <Typography variant="bodySmall" data-testid={testId}>
+        ❌
+      </Typography>
+    );
   return null;
 };
 

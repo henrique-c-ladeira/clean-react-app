@@ -1,14 +1,20 @@
 import styled from 'styled-components';
 
-export const InputSC = styled.input`
-  padding: 16px 24px;
-  font-family: ${(props) => props.theme.font.regular};
-  font-size: 26px;
+export const ContainerSC = styled.div`
+  display: flex;
+  position: relative;
   background-color: ${(props) => props.theme.colors.darkContrast};
-  color: ${(props) => props.theme.colors.textLight};
+  align-items: center;
+`;
+
+export const InputSC = styled.input`
   border-width: 2px;
   border-color: transparent;
   border-radius: 6px;
+  padding: 16px 24px;
+  font-family: ${(props) => props.theme.font.regular};
+  font-size: 26px;
+  color: ${(props) => props.theme.colors.textLight};
 
   &::placeholder {
     color: ${(props) => props.theme.colors.textLight};

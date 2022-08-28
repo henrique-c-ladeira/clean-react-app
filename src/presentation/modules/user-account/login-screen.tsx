@@ -34,6 +34,7 @@ const Login: React.FC<LoginProps> = ({ validation }) => {
         type="email"
         placeholder="E-mail"
         data-testid="email"
+        error
       />
       <BoxContent h={16} />
       <Input
@@ -42,6 +43,7 @@ const Login: React.FC<LoginProps> = ({ validation }) => {
         type="password"
         placeholder="Password"
         data-testid="password"
+        error
       />
       <BoxContent h={40} />
       <Button title="Submit" data-testid="submit-button" disabled />

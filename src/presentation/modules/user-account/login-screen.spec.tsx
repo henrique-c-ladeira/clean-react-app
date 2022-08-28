@@ -20,6 +20,8 @@ describe('LoginScreen Component', () => {
   it('should render initial state correctly', () => {
     const { sut } = makeSut();
     expect(sut.queryByTestId('status-indicator')).toBeNull();
+    expect(sut.getAllByText('❌'));
+    expect(sut.queryByText('✅')).toBeNull();
     const submitButton = sut.getByTestId('submit-button') as HTMLButtonElement;
     expect(submitButton.disabled).toBe(true);
   });
