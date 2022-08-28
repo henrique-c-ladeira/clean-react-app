@@ -1,5 +1,6 @@
 export interface ThemeInterface {
   colors: {
+    disabled: string;
     lightContrast: string;
     darkContrast: string;
     background: string;

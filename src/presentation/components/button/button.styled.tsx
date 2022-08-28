@@ -13,4 +13,14 @@ export const ButtonSC = styled.button<ButtonProps>`
     box-shadow: 0px 0px 5px ${(props) => props.theme.colors.primaryLight};
     transform: scale(0.98);
   }
+
+  &:disabled {
+    color: ${(props) => props.theme.colors.lightContrast};
+    background-color: ${(props) => props.theme.colors.disabled};
+    box-shadow: 1px 1px 1px ${(props) => props.theme.colors.lightContrast};
+    &:active {
+      transform: scale(1);
+      box-shadow: 1px 1px 1px ${(props) => props.theme.colors.lightContrast};
+    }
+  }
 `;

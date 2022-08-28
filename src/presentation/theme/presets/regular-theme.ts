@@ -2,6 +2,7 @@ import { ThemeInterface } from '../theme-interface';
 
 export const theme: ThemeInterface = {
   colors: {
+    disabled: '#f4f2f3',
     lightContrast: 'white',
     darkContrast: '#373744',
     background: '#f4f8f9',

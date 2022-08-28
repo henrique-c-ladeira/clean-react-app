@@ -14,7 +14,7 @@ const Login: React.FC = () => (
     <Input type="email" placeholder="E-mail" />
     <BoxContent h={16} />
     <Input type="password" placeholder="Password" />
-    <BoxContent h={16} />
+    <BoxContent h={40} />
     <Button title="Submit" data-testid="submit-button" disabled />
     <StatusIndicator />
   </BoxContent>
