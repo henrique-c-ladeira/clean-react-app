@@ -2,6 +2,8 @@ import { ThemeInterface } from '../theme-interface';
 
 export const theme: ThemeInterface = {
   colors: {
+    lightContrast: 'white',
+    darkContrast: '#373744',
     background: '#f4f8f9',
     primary: '#096ba0',
     primaryDark: '#064466',

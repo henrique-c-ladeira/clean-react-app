@@ -1,11 +1,20 @@
 import React from 'react';
-import { BoxContent, Input, Typography } from '~/presentation/components';
+import {
+  BoxContent,
+  Button,
+  Input,
+  Typography,
+} from '~/presentation/components';
 
 const Login: React.FC = () => (
-  <BoxContent center>
-    <Typography>Login</Typography>
+  <BoxContent center fillVertical>
+    <Typography variant="heading">Login</Typography>
+    <BoxContent h={16} />
     <Input type="email" placeholder="E-mail" />
+    <BoxContent h={16} />
     <Input type="password" placeholder="Password" />
+    <BoxContent h={16} />
+    <Button title="Submit" />
   </BoxContent>
 );
 
