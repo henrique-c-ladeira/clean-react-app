@@ -5,6 +5,7 @@ import {
   Input,
   Typography,
 } from '~/presentation/components';
+import StatusIndicator from '~/presentation/components/status-indicator/status-indicator';
 
 const Login: React.FC = () => (
   <BoxContent center fillVertical>
@@ -15,6 +16,7 @@ const Login: React.FC = () => (
     <Input type="password" placeholder="Password" />
     <BoxContent h={16} />
     <Button title="Submit" />
+    <StatusIndicator />
   </BoxContent>
 );
 
