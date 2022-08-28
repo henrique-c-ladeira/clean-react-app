@@ -15,7 +15,7 @@ const Login: React.FC = () => (
     <BoxContent h={16} />
     <Input type="password" placeholder="Password" />
     <BoxContent h={16} />
-    <Button title="Submit" />
+    <Button title="Submit" data-testid="submit-button" disabled />
     <StatusIndicator />
   </BoxContent>
 );

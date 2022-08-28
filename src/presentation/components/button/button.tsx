@@ -7,10 +7,11 @@ export interface ButtonProps
   inverted?: boolean;
   transparent?: boolean;
   title: string;
+  'data-testid'?: string;
 }
 
 const Button: React.FC<ButtonProps> = (props) => (
-  <ButtonSC {...props}>
+  <ButtonSC {...props} data-testid={props['data-testid']}>
     <Typography>{props.title}</Typography>
   </ButtonSC>
 );

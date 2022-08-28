@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import { ButtonProps } from './button';
 
-export const ButtonSC = styled.button`
+export const ButtonSC = styled.button<ButtonProps>`
   padding: 4px 24px;
   background-color: ${(props) => props.theme.colors.primaryDark};
   color: ${(props) => props.theme.colors.textLight};

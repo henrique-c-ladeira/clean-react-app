@@ -6,7 +6,7 @@ type Variants = 'bodySmall' | 'bodyRegular' | 'heading' | 'subHeading';
 export interface TypographyProps {
   children: string;
   variant?: Variants;
-  testID?: string;
+  'data-testid'?: string;
 }
 
 const Typography: React.FC<TypographyProps> = ({
@@ -14,7 +14,7 @@ const Typography: React.FC<TypographyProps> = ({
   variant = 'bodyRegular',
   ...props
 }) => (
-  <TypographySC {...props} variant={variant}>
+  <TypographySC {...props} variant={variant} data-testid={props['data-testid']}>
     {children}
   </TypographySC>
 );

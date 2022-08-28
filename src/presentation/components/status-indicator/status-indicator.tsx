@@ -9,11 +9,11 @@ interface StatusIndicatorProps {
 
 const StatusIndicator: React.FC<StatusIndicatorProps> = (props) => {
   if (props.isSuccess)
-    return <Typography testID="status-indicator"> Success</Typography>;
+    return <Typography data-testid="status-indicator"> Success</Typography>;
   if (props.isLoading)
-    return <Typography testID="status-indicator"> Loading...</Typography>;
+    return <Typography data-testid="status-indicator"> Loading...</Typography>;
   if (props.isError)
-    return <Typography testID="status-indicator"> Error</Typography>;
+    return <Typography data-testid="status-indicator"> Error</Typography>;
   return null;
 };
 
