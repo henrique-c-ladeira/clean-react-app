@@ -16,12 +16,18 @@ const Login: React.FC<LoginProps> = ({ validation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const [emailError, setEmailError] = useState<string | null>('');
+  const [passwordError, setPasswordError] = useState<string | null>('');
+
+  const validationEmailError = () => validation.validate({ email });
+  const validationPasswordError = () => validation.validate({ password });
+
   useEffect(() => {
-    validation.validate({ email });
+    setEmailError(validationEmailError());
   }, [email]);
 
   useEffect(() => {
-    validation.validate({ password });
+    setPasswordError(validationPasswordError());
   }, [password]);
 
   return (
@@ -34,7 +40,7 @@ const Login: React.FC<LoginProps> = ({ validation }) => {
         type="email"
         placeholder="E-mail"
         data-testid="email"
-        error
+        error={!!emailError}
       />
       <BoxContent h={16} />
       <Input
@@ -43,7 +49,7 @@ const Login: React.FC<LoginProps> = ({ validation }) => {
         type="password"
         placeholder="Password"
         data-testid="password"
-        error
+        error={!!passwordError}
       />
       <BoxContent h={40} />
       <Button title="Submit" data-testid="submit-button" disabled />
