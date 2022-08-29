@@ -19,6 +19,8 @@ const Login: React.FC<LoginProps> = ({ validation }) => {
   const [emailError, setEmailError] = useState<string | null>('');
   const [passwordError, setPasswordError] = useState<string | null>('');
 
+  const isAnyError = !!emailError || !!passwordError;
+
   const validationEmailError = () => validation.validate({ email });
   const validationPasswordError = () => validation.validate({ password });
 
@@ -52,7 +54,11 @@ const Login: React.FC<LoginProps> = ({ validation }) => {
         error={!!passwordError}
       />
       <BoxContent h={40} />
-      <Button title="Submit" data-testid="submit-button" disabled />
+      <Button
+        title="Submit"
+        data-testid="submit-button"
+        disabled={isAnyError}
+      />
       <StatusIndicator />
     </BoxContent>
   );

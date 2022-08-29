@@ -58,5 +58,7 @@ describe('LoginScreen Component', () => {
     fireEvent.input(passwordInput, { target: { value: password } });
 
     expect(sut.getAllByText('✅'));
+    const submitButton = sut.getByTestId('submit-button') as HTMLButtonElement;
+    expect(submitButton.disabled).toBe(false);
   });
 });
