@@ -6,6 +6,7 @@ import {
   Typography,
 } from '~/presentation/components';
 import StatusIndicator from '~/presentation/components/status-indicator/status-indicator';
+import { useStateWithValidation } from '~/presentation/hooks';
 import { Validation } from '~/presentation/protocols/validation';
 
 type LoginProps = {
@@ -13,24 +14,19 @@ type LoginProps = {
 };
 
 const Login: React.FC<LoginProps> = ({ validation }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const validateField = (fieldName: string) => (fieldValue: string) =>
+    validation.validate(fieldName, fieldValue);
 
-  const [emailError, setEmailError] = useState<string | null>('');
-  const [passwordError, setPasswordError] = useState<string | null>('');
+  const [email, setEmail, emailError] = useStateWithValidation<string>(
+    '',
+    validateField('email')
+  );
+  const [password, setPassword, passwordError] = useStateWithValidation<string>(
+    '',
+    validateField('password')
+  );
 
   const isAnyError = !!emailError || !!passwordError;
-
-  const validationEmailError = () => validation.validate({ email });
-  const validationPasswordError = () => validation.validate({ password });
-
-  useEffect(() => {
-    setEmailError(validationEmailError());
-  }, [email]);
-
-  useEffect(() => {
-    setPasswordError(validationPasswordError());
-  }, [password]);
 
   return (
     <BoxContent center fillVertical>

@@ -3,10 +3,12 @@ import { Validation } from '../protocols/validation';
 
 export class ValidationFake implements Validation {
   errorMessage: string | null = 'error';
-  input?: object;
+  fieldName?: string;
+  fieldValue?: string;
 
-  validate(input: object) {
-    this.input = input;
+  validate(fieldName: string, fieldValue: string) {
+    this.fieldName = fieldName;
+    this.fieldValue = fieldValue;
     return this.errorMessage;
   }
 }
