@@ -4,23 +4,24 @@ import { HttpPostClientSpy } from '~/data/test/mock-http-client';
 import { AccountModel } from '~/domain/models';
 import { HttpStatusCode } from '~/data/protocols/http';
 import { InvalidCredentialsError, UnexpectedError } from '~/domain/errors';
-import {
-  mockAccountModel,
-  mockAuthenticationParams,
-} from '~/domain/test/mock-account';
+import { mockAuthenticationParams } from '~/domain/test/mock-account';
 import { AuthenticationParams } from '~/domain/usecases/authentication';
+import { PostTokenResponse } from '~/data/protocols/api/post-token-response';
 
 type SutTypes = {
   sut: RemoteAuthentication;
-  httpPostClientSpy: HttpPostClientSpy<AuthenticationParams, AccountModel>;
+  httpPostClientSpy: HttpPostClientSpy<AuthenticationParams, PostTokenResponse>;
 };
 
 const makeSut = (url: string = faker.internet.url()): SutTypes => {
   const httpPostClientSpy = new HttpPostClientSpy<
     AuthenticationParams,
-    AccountModel
+    PostTokenResponse
   >();
-  httpPostClientSpy.response.body = { accessToken: faker.datatype.uuid() };
+  httpPostClientSpy.response.body = {
+    username: faker.name.firstName(),
+    jwt: faker.datatype.uuid(),
+  };
   const sut = new RemoteAuthentication(url, httpPostClientSpy);
   return { sut, httpPostClientSpy };
 };
@@ -78,12 +79,22 @@ describe('RemoteAuthentication', () => {
 
   it('should return an AccountModel if HttpPostClient returns 200', async () => {
     const { sut, httpPostClientSpy } = makeSut();
-    const httpResult = mockAccountModel();
+
+    const accessToken = faker.datatype.uuid();
+    const httpResult = {
+      username: faker.name.firstName(),
+      jwt: accessToken,
+    };
     httpPostClientSpy.response = {
       statusCode: HttpStatusCode.success,
       body: httpResult,
     };
+
+    const authResult: AccountModel = {
+      accessToken,
+    };
+
     const account = await sut.auth(mockAuthenticationParams());
-    await expect(account).toEqual(httpResult);
+    await expect(account).toEqual(authResult);
   });
 });
