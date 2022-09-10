@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { Authentication } from '~/domain/usecases/authentication';
 import {
   BoxContent,
   Button,
@@ -11,9 +12,10 @@ import { Validation } from '~/presentation/protocols/validation';
 
 type LoginProps = {
   validation: Validation;
+  authentication: Authentication;
 };
 
-const Login: React.FC<LoginProps> = ({ validation }) => {
+const Login: React.FC<LoginProps> = ({ validation, authentication }) => {
   const validateField = (fieldName: string) => (fieldValue: string) =>
     validation.validate(fieldName, fieldValue);
 
@@ -26,7 +28,22 @@ const Login: React.FC<LoginProps> = ({ validation }) => {
     validateField('password')
   );
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const isAnyError = !!emailError || !!passwordError;
+
+  const onSubmit = async () => {
+    try {
+      setIsLoading(true);
+      const result = await authentication.auth({ email, password });
+      console.log(result);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
+      console.log(err?.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <BoxContent center fillVertical>
@@ -54,6 +71,8 @@ const Login: React.FC<LoginProps> = ({ validation }) => {
         title="Submit"
         data-testid="submit-button"
         disabled={isAnyError}
+        loading={isLoading}
+        onClick={onSubmit}
       />
       <StatusIndicator />
     </BoxContent>

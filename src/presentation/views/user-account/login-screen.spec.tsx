@@ -1,4 +1,9 @@
 import { faker } from '@faker-js/faker';
+import { AccountModel } from '~/domain/models';
+import {
+  Authentication,
+  AuthenticationParams,
+} from '~/domain/usecases/authentication';
 import { ValidationFake } from '~/presentation/test';
 import { cleanup, fireEvent, render, RenderResult } from '~/shared/tests-utils';
 import LoginScreen from './login-screen';
@@ -8,9 +13,21 @@ type SutTypes = {
   validationFake: ValidationFake;
 };
 
+// TODO - add tests for authentication and remove Spy from this file
+class AuthenticationSpy implements Authentication {
+  auth(params: AuthenticationParams): Promise<AccountModel> {
+    return Promise.resolve({ accessToken: 'mock' });
+  }
+}
+
 const makeSut = (): SutTypes => {
   const validationFake = new ValidationFake();
-  const sut = render(<LoginScreen validation={validationFake} />);
+  const sut = render(
+    <LoginScreen
+      validation={validationFake}
+      authentication={new AuthenticationSpy()}
+    />
+  );
   return { sut, validationFake };
 };
 
