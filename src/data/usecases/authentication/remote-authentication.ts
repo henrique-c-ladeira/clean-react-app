@@ -5,13 +5,14 @@ import {
 import { InvalidCredentialsError, UnexpectedError } from '~/domain/errors';
 import { AccountModel } from '~/domain/models';
 import { HttpPostClient, HttpStatusCode } from '~/data/protocols/http';
+import { PostTokenResponse } from '~/data/protocols/api/post-token-response';
 
 export class RemoteAuthentication implements Authentication {
   constructor(
     private readonly url: string,
     private readonly httpClient: HttpPostClient<
       AuthenticationParams,
-      AccountModel
+      PostTokenResponse
     >
   ) {}
 
@@ -22,7 +23,8 @@ export class RemoteAuthentication implements Authentication {
     });
     switch (httpResponse.statusCode) {
       case HttpStatusCode.success:
-        if (httpResponse.body?.accessToken) return httpResponse.body;
+        if (httpResponse.body?.jwt)
+          return { accessToken: httpResponse.body.jwt };
         break;
       case HttpStatusCode.unauthorized:
         throw new InvalidCredentialsError();
