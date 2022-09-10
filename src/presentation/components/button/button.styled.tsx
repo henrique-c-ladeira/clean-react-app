@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { ButtonProps } from './button';
 
 export const ButtonSC = styled.button<ButtonProps>`
@@ -8,6 +8,14 @@ export const ButtonSC = styled.button<ButtonProps>`
   border-width: 0px;
   border-color: ${(props) => props.theme.colors.primaryLight};
   box-shadow: 1px 1px 1px ${(props) => props.theme.colors.primaryLight};
+
+  &:hover {
+    ${(props) =>
+      !props.disabled &&
+      css`
+        cursor: pointer;
+      `}
+  }
 
   &:active {
     box-shadow: 0px 0px 5px ${(props) => props.theme.colors.primaryLight};

@@ -8,11 +8,16 @@ export interface ButtonProps
   transparent?: boolean;
   title: string;
   'data-testid'?: string;
+  loading?: boolean;
 }
 
-const Button: React.FC<ButtonProps> = (props) => (
-  <ButtonSC {...props} data-testid={props['data-testid']}>
-    <Typography>{props.title}</Typography>
+const Button: React.FC<ButtonProps> = ({ disabled, ...otherProps }) => (
+  <ButtonSC
+    {...otherProps}
+    data-testid={otherProps['data-testid']}
+    disabled={disabled || otherProps.loading}
+  >
+    <Typography>{otherProps.title}</Typography>
   </ButtonSC>
 );
 
