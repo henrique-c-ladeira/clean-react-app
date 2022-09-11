@@ -8,8 +8,8 @@ const makeSut = () => {
 };
 
 describe('App', () => {
-  it('should render', () => {
+  it('should render child nodes', () => {
     const { sut } = makeSut();
-    expect(sut.container).toBeInstanceOf(HTMLDivElement);
+    expect(sut.container.hasChildNodes()).toBeTruthy();
   });
 });
