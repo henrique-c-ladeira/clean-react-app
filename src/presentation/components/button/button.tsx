@@ -11,11 +11,15 @@ export interface ButtonProps
   loading?: boolean;
 }
 
-const Button: React.FC<ButtonProps> = ({ disabled, ...otherProps }) => (
+const Button: React.FC<ButtonProps> = ({
+  disabled,
+  loading,
+  ...otherProps
+}) => (
   <ButtonSC
     {...otherProps}
     data-testid={otherProps['data-testid']}
-    disabled={disabled || otherProps.loading}
+    disabled={disabled || loading}
   >
     <Typography>{otherProps.title}</Typography>
   </ButtonSC>
