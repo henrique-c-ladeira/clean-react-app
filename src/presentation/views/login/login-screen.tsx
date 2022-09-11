@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Authentication } from '~/domain/usecases/authentication';
+import { SaveAccessToken } from '~/domain/usecases/save-access-token';
 import {
   BoxContent,
   Button,
   Input,
+  Switch,
   Typography,
 } from '~/presentation/components';
 import StatusIndicator from '~/presentation/components/status-indicator/status-indicator';
@@ -13,9 +15,16 @@ import { Validation } from '~/presentation/protocols/validation';
 type LoginProps = {
   validation: Validation;
   authentication: Authentication;
+  saveAccessToken: SaveAccessToken;
 };
 
-const Login: React.FC<LoginProps> = ({ validation, authentication }) => {
+const Login: React.FC<LoginProps> = ({
+  validation,
+  authentication,
+  saveAccessToken,
+}) => {
+  const [active, setActive] = useState(false);
+
   const validateField = (fieldName: string) => (fieldValue: string) =>
     validation.validate(fieldName, fieldValue);
 
@@ -28,7 +37,7 @@ const Login: React.FC<LoginProps> = ({ validation, authentication }) => {
     validateField('password')
   );
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean | undefined>(false);
 
   const isAnyError = !!emailError || !!passwordError;
 
@@ -37,6 +46,7 @@ const Login: React.FC<LoginProps> = ({ validation, authentication }) => {
       setIsLoading(true);
       const result = await authentication.auth({ email, password });
       console.log(result);
+      await saveAccessToken.save(result.accessToken);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       console.log(err?.message);
@@ -47,6 +57,8 @@ const Login: React.FC<LoginProps> = ({ validation, authentication }) => {
 
   return (
     <BoxContent center fillVertical>
+      <Switch active={active} onToggle={() => setActive((prev) => !prev)} />
+      <BoxContent h={16} />
       <Typography variant="heading">Login</Typography>
       <BoxContent h={16} />
       <Input
