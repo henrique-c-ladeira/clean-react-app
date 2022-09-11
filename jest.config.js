@@ -2,7 +2,7 @@
 /** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
 module.exports = {
   roots: ['<rootDir>/src'],
-  collectCoverageFrom: ['<rootDir>/src/**/*.{ts,tsx}', '!**/*.d.ts'],
+  collectCoverageFrom: ['<rootDir>/src/**/*.{ts,tsx}', '!<rootDir>/src/main/entry.tsx', '!**/*.d.ts'],
   coverageDirectory: 'coverage',
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
