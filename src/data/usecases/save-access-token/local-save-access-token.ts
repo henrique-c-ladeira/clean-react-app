@@ -1,4 +1,4 @@
-import { SetStorage } from '~/data/protocols/storage/set-storage';
+import { SetStorage } from '~/data/contracts/storage/set-storage';
 import { SaveAccessToken } from '~/domain/usecases/save-access-token';
 
 export class LocalSaveAccessToken implements SaveAccessToken {

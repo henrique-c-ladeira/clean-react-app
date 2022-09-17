@@ -10,7 +10,7 @@ import {
 } from '~/presentation/components';
 import StatusIndicator from '~/presentation/components/status-indicator/status-indicator';
 import { useStateWithValidation } from '~/presentation/hooks';
-import { Validation } from '~/presentation/protocols/validation';
+import { Validation } from '~/presentation/contracts/validation';
 
 type LoginProps = {
   validation: Validation;

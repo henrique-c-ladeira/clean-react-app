@@ -1,4 +1,4 @@
-import { FieldValidation } from '../protocols/field-validation';
+import { FieldValidation } from '../contracts/field-validation';
 import {
   EmailValidation,
   MinLengthValidation,

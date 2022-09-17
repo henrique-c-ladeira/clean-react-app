@@ -1,4 +1,4 @@
-import { SetStorage } from '../protocols/storage/set-storage';
+import { SetStorage } from '../contracts/storage/set-storage';
 
 export class SetStorageMock implements SetStorage {
   key?: string;

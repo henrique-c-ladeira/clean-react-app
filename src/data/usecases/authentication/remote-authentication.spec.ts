@@ -2,11 +2,11 @@ import { faker } from '@faker-js/faker';
 import { RemoteAuthentication } from './remote-authentication';
 import { HttpPostClientSpy } from '~/data/test/mock-http-client';
 import { AccountModel } from '~/domain/models';
-import { HttpStatusCode } from '~/data/protocols/http';
+import { HttpStatusCode } from '~/data/contracts/http';
 import { InvalidCredentialsError, UnexpectedError } from '~/domain/errors';
 import { mockAuthenticationParams } from '~/domain/test/mock-account';
 import { AuthenticationParams } from '~/domain/usecases/authentication';
-import { PostTokenResponse } from '~/data/protocols/api/post-token-response';
+import { PostTokenResponse } from '~/data/contracts/api/post-token-response';
 
 type SutTypes = {
   sut: RemoteAuthentication;
