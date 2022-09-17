@@ -1,5 +1,5 @@
 import { InvalidFieldError } from '../../errors/invalid-field-error';
-import { FieldValidation } from '../../protocols/field-validation';
+import { FieldValidation } from '../../contracts/field-validation';
 
 export class EmailValidation implements FieldValidation {
   constructor(readonly field: string) {}

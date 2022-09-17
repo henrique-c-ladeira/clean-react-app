@@ -4,8 +4,8 @@ import {
 } from '~/domain/usecases/authentication';
 import { InvalidCredentialsError, UnexpectedError } from '~/domain/errors';
 import { AccountModel } from '~/domain/models';
-import { HttpPostClient, HttpStatusCode } from '~/data/protocols/http';
-import { PostTokenResponse } from '~/data/protocols/api/post-token-response';
+import { HttpPostClient, HttpStatusCode } from '~/data/contracts/http';
+import { PostTokenResponse } from '~/data/contracts/api/post-token-response';
 
 export class RemoteAuthentication implements Authentication {
   constructor(

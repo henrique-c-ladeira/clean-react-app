@@ -3,7 +3,7 @@ import {
   HttpPostParams,
   HttpResponse,
   HttpStatusCode,
-} from '~/data/protocols/http';
+} from '~/data/contracts/http';
 
 export class HttpPostClientSpy<T, R> implements HttpPostClient<T, R> {
   url?: string;

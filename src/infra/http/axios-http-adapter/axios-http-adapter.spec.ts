@@ -2,6 +2,7 @@ import { AxiosHttpAdapter } from './axios-http-adapter';
 import { mockAxiosPost } from '~/infra/test';
 import { mockPostRequest } from '~/data/test';
 import axios from 'axios';
+import { faker } from '@faker-js/faker';
 
 jest.mock('axios');
 
@@ -27,6 +28,19 @@ describe('AxiosHttpAdapter', () => {
 
   it('should return correct statusCode and body', async () => {
     const { sut, axiosMock } = makeSut();
+    const promise = sut.post(mockPostRequest());
+    expect(promise).toEqual(axiosMock.post.mock.results[0].value);
+  });
+
+  it('should return correct statusCode and body on failure', async () => {
+    const { sut, axiosMock } = makeSut();
+    const axiosResultMock = {
+      data: JSON.parse(faker.datatype.json()),
+      status: faker.random.numeric(),
+    };
+    axiosMock.post.mockImplementation(() =>
+      Promise.reject({ response: axiosResultMock })
+    );
     const promise = sut.post(mockPostRequest());
     expect(promise).toEqual(axiosMock.post.mock.results[0].value);
   });

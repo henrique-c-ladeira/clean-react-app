@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Validation } from '../protocols/validation';
+import { Validation } from '../contracts/validation';
 
-export class ValidationFake implements Validation {
+export class ValidationSpy implements Validation {
   errorMessage: string | null = 'error';
   fieldName?: string;
   fieldValue?: string;

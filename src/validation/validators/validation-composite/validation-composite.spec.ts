@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
-import { Validation } from '~/presentation/protocols/validation';
-import { FieldValidation } from '~/validation/protocols/field-validation';
+import { Validation } from '~/presentation/contracts/validation';
+import { FieldValidation } from '~/validation/contracts/field-validation';
 import { FieldValidationSpy } from '~/validation/test/mock-field-validation';
 import { ValidationComposite } from './validation-composite';
 

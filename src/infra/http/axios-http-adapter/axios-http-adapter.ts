@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { HttpPostClient, HttpPostParams } from '~/data/protocols/http';
+import { HttpPostClient, HttpPostParams } from '~/data/contracts/http';
 
 export class AxiosHttpAdapter implements HttpPostClient<unknown, unknown> {
   async post(params: HttpPostParams<unknown>) {
