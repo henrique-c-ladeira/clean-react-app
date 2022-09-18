@@ -44,7 +44,7 @@ const Login: React.FC<LoginProps> = ({
     setState((prev) => ({ ...prev, ...value }));
   };
 
-  const [isLoading, setIsLoading] = useState<boolean | undefined>(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const isAnyError = !!stateError?.email || !!stateError?.password;
 
