@@ -30,19 +30,9 @@ const initialState: SignUpState = {
 };
 
 const SignUp: React.FC<SignUpProps> = ({ validation, signUp }) => {
-  const validateState = (state: SignUpState) => ({
-    name: validation.validate('name', state.name),
-    email: validation.validate('email', state.email),
-    password: validation.validate('password', state.password),
-    confirmPassword: validation.validate(
-      'confirmPassword',
-      state.confirmPassword
-    ),
-  });
-
   const [state, setState, stateError] = useStateWithValidation<SignUpState>(
     initialState,
-    validateState
+    validation
   );
 
   const appendState = (value: Partial<SignUpState>) => {
@@ -94,6 +84,7 @@ const SignUp: React.FC<SignUpProps> = ({ validation, signUp }) => {
         value={state.password}
         onChange={(e) => appendState({ password: e.target.value })}
         placeholder="Password"
+        type="password"
         data-testid="password"
         error={!!(stateError as Record<keyof SignUpState, string>)?.password}
       />
@@ -103,6 +94,7 @@ const SignUp: React.FC<SignUpProps> = ({ validation, signUp }) => {
         value={state.confirmPassword}
         onChange={(e) => appendState({ confirmPassword: e.target.value })}
         placeholder="Confirm Password"
+        type="password"
         data-testid="confirmPassword"
         error={
           !!(stateError as Record<keyof SignUpState, string>)?.confirmPassword
