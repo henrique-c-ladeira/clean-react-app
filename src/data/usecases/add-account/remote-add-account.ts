@@ -7,14 +7,14 @@ export class RemoteAddAccount implements AddAccount {
   constructor(
     private readonly url: string,
     private readonly httpPostClient: HttpPostClient<
-      AddAccountParams,
+      AddAccountParams & { phone: string; birthday: string },
       PostUsersResponse
     >
   ) {}
   async add(params: AddAccountParams): Promise<void> {
     const httpResponse = await this.httpPostClient.post({
       url: this.url,
-      body: params,
+      body: { ...params, phone: '789456123', birthday: '10/02/1992' },
     });
     if (httpResponse.statusCode === HttpStatusCode.serverError)
       throw new UnexpectedError();

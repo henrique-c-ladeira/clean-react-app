@@ -24,11 +24,15 @@ describe('Remote Add Account', () => {
     expect(httpPostClientSpy.url).toBe(url);
   });
 
-  it('should call http client with correct body', async () => {
+  it('should call http client with correct body and default birthday and phone', async () => {
     const { sut, httpPostClientSpy } = makeSut();
     const httpBody = mockAddAccountParams();
     await sut.add(httpBody);
-    expect(httpPostClientSpy.body).toBe(httpBody);
+    expect(httpPostClientSpy.body).toEqual({
+      ...httpBody,
+      phone: '789456123',
+      birthday: '10/02/1992',
+    });
   });
 
   it('should throw UnexpectedError if httpPostClient returns 400', async () => {
