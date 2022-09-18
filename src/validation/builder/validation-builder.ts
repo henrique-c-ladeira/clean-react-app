@@ -31,9 +31,9 @@ export class ValidationBuilder {
     return this;
   }
 
-  match(valueToCompare: string) {
+  match(fieldToCompare: string) {
     this.validations.push(
-      new CompareFieldsValidation(this.fieldName, valueToCompare)
+      new CompareFieldsValidation(this.fieldName, fieldToCompare)
     );
     return this;
   }
