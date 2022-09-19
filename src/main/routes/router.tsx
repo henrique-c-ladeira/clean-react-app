@@ -1,12 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { MakeLogin } from '~/main/factories/views/login/login-factory';
+import { MakeSignUp } from '~/main/factories/views/sign-up/sign-up-factory';
 
-type Props = {
-  MakeLogin: React.FC;
-  MakeSignUp: React.FC;
-};
-
-const Router: React.FC<Props> = ({ MakeLogin, MakeSignUp }) => (
+const Router: React.FC = () => (
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<MakeLogin />} />
