@@ -4,12 +4,12 @@ import { HttpStatusCode } from '~/data/contracts/http';
 import { HttpPostClientSpy } from '~/data/test';
 import { UnexpectedError } from '~/domain/errors';
 import { mockAddAccountParams } from '~/domain/test/mock-account';
-import { AddAccountParams } from '~/domain/usecases';
+import { AddAccount } from '~/domain/usecases';
 import { RemoteAddAccount } from './remote-add-account';
 
 const makeSut = (url: string = faker.internet.url()) => {
   const httpPostClientSpy = new HttpPostClientSpy<
-    AddAccountParams,
+    AddAccount.Params,
     PostUsersResponse
   >();
   const sut = new RemoteAddAccount(url, httpPostClientSpy);
