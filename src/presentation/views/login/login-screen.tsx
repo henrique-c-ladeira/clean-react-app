@@ -11,6 +11,7 @@ import {
 import StatusIndicator from '~/presentation/components/status-indicator/status-indicator';
 import { useStateWithValidation } from '~/presentation/hooks';
 import { Validation } from '~/presentation/contracts/validation';
+import { useNavigate } from 'react-router-dom';
 
 type LoginProps = {
   validation: Validation;
@@ -33,6 +34,8 @@ const Login: React.FC<LoginProps> = ({
   authentication,
   saveAccessToken,
 }) => {
+  const navigate = useNavigate();
+
   const [active, setActive] = useState(false);
 
   const [state, setState, stateError] = useStateWithValidation<LoginState>(
@@ -63,6 +66,10 @@ const Login: React.FC<LoginProps> = ({
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const navigateToSignUp = () => {
+    navigate('/signup');
   };
 
   return (
@@ -96,6 +103,7 @@ const Login: React.FC<LoginProps> = ({
         loading={isLoading}
         onClick={onSubmit}
       />
+      <Button title="Sign up" onClick={navigateToSignUp} />
       <StatusIndicator />
     </BoxContent>
   );
