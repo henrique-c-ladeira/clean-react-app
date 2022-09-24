@@ -4,10 +4,10 @@ module.exports = {
   roots: ['<rootDir>/src'],
   collectCoverageFrom: [
     '<rootDir>/src/**/*.{ts,tsx}',
-    '!<rootDir>/src/main/entry.tsx',
+    '!<rootDir>/src/main/**',
     '!**/*.d.ts', '!**/index.ts',
     '!**/*-error.ts',
-    '!**/test/**'
+    '!**/test/**',
   ],
   coverageDirectory: 'coverage',
   preset: 'ts-jest',
