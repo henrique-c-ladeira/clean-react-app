@@ -14,6 +14,8 @@ type SutTypes = {
   validationSpy: ValidationSpy;
 };
 
+jest.mock('react-router-dom', () => ({ useNavigate: jest.fn() }));
+
 // TODO - add tests for authentication and saveAccessToken
 // and remove Spy from this file
 class AuthenticationSpy implements Authentication {
