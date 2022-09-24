@@ -1,5 +1,6 @@
 import { faker } from '@faker-js/faker';
 import {
+  HttpGetClient,
   HttpGetParams,
   HttpPostClient,
   HttpPostParams,
@@ -17,6 +18,20 @@ export class HttpPostClientSpy<T, R> implements HttpPostClient<T, R> {
   post(params: HttpPostParams<T>): Promise<HttpResponse<R>> {
     this.url = params.url;
     this.body = params.body;
+    return Promise.resolve(this.response);
+  }
+}
+
+export class HttpGetClientSpy<T, R> implements HttpGetClient<T, R> {
+  url?: string;
+  queryStringUrl?: T;
+  response: HttpResponse<R> = {
+    statusCode: HttpStatusCode.success,
+  };
+
+  get(params: HttpGetParams<T>): Promise<HttpResponse<R>> {
+    this.url = params.url;
+    this.queryStringUrl = params.queryStringUrl;
     return Promise.resolve(this.response);
   }
 }

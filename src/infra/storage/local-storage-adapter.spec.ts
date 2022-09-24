@@ -12,11 +12,18 @@ describe('Local Storage Adapter', () => {
     localStorage.clear();
   });
 
-  it('should call local storage correctly', async () => {
+  it('should call set local storage correctly', async () => {
     const { sut } = makeSut();
     const key = faker.database.column();
     const value = faker.random.word();
     await sut.set(key, value);
     expect(localStorage.setItem).toHaveBeenCalledWith(key, value);
+  });
+
+  it('should call get local storage correctly', async () => {
+    const { sut } = makeSut();
+    const key = faker.database.column();
+    await sut.get(key);
+    expect(localStorage.getItem).toHaveBeenCalledWith(key);
   });
 });
