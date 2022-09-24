@@ -1,14 +1,26 @@
 import { useEffect, useState } from 'react';
+import { Validation } from '../contracts/validation';
 
-function useStateWithValidation<T>(
+type ValidationReturn<T> = Record<keyof T, string | null> | null;
+
+function useStateWithValidation<T extends object>(
   initialState: T,
-  validate: (args: T) => string | null
-): [T, React.Dispatch<React.SetStateAction<T>>, string | null] {
+  validation: Validation
+): [T, React.Dispatch<React.SetStateAction<T>>, ValidationReturn<T>] {
   const [state, setState] = useState<T>(initialState);
-  const [stateError, setStateError] = useState<string | null>('');
+  const [stateError, setStateError] = useState<ValidationReturn<T>>(null);
+
+  const validateState = (state: T): ValidationReturn<T> =>
+    Object.keys(state).reduce(
+      (acc, cur) => ({
+        ...acc,
+        [cur]: validation.validate(cur, state as Record<string, string>),
+      }),
+      {}
+    ) as ValidationReturn<T>;
 
   useEffect(() => {
-    setStateError(validate(state));
+    setStateError(validateState(state));
   }, [state]);
 
   return [state, setState, stateError];

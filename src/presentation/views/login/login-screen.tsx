@@ -11,6 +11,7 @@ import {
 import StatusIndicator from '~/presentation/components/status-indicator/status-indicator';
 import { useStateWithValidation } from '~/presentation/hooks';
 import { Validation } from '~/presentation/contracts/validation';
+import { useNavigate } from 'react-router-dom';
 
 type LoginProps = {
   validation: Validation;
@@ -18,33 +19,45 @@ type LoginProps = {
   saveAccessToken: SaveAccessToken;
 };
 
+type LoginState = {
+  email: string;
+  password: string;
+};
+
+const initalState = {
+  email: '',
+  password: '',
+};
+
 const Login: React.FC<LoginProps> = ({
   validation,
   authentication,
   saveAccessToken,
 }) => {
+  const navigate = useNavigate();
+
   const [active, setActive] = useState(false);
 
-  const validateField = (fieldName: string) => (fieldValue: string) =>
-    validation.validate(fieldName, fieldValue);
-
-  const [email, setEmail, emailError] = useStateWithValidation<string>(
-    '',
-    validateField('email')
-  );
-  const [password, setPassword, passwordError] = useStateWithValidation<string>(
-    '',
-    validateField('password')
+  const [state, setState, stateError] = useStateWithValidation<LoginState>(
+    initalState,
+    validation
   );
 
-  const [isLoading, setIsLoading] = useState<boolean | undefined>(false);
+  const appendState = (value: Partial<LoginState>) => {
+    setState((prev) => ({ ...prev, ...value }));
+  };
 
-  const isAnyError = !!emailError || !!passwordError;
+  const [isLoading, setIsLoading] = useState(false);
+
+  const isAnyError = !!stateError?.email || !!stateError?.password;
 
   const onSubmit = async () => {
     try {
       setIsLoading(true);
-      const result = await authentication.auth({ email, password });
+      const result = await authentication.auth({
+        email: state.email,
+        password: state.password,
+      });
       console.log(result);
       await saveAccessToken.save(result.accessToken);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -55,6 +68,10 @@ const Login: React.FC<LoginProps> = ({
     }
   };
 
+  const navigateToSignUp = () => {
+    navigate('/signup');
+  };
+
   return (
     <BoxContent center fillVertical>
       <Switch active={active} onToggle={() => setActive((prev) => !prev)} />
@@ -62,21 +79,21 @@ const Login: React.FC<LoginProps> = ({
       <Typography variant="heading">Login</Typography>
       <BoxContent h={16} />
       <Input
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        value={state.email}
+        onChange={(e) => appendState({ email: e.target.value })}
         type="email"
         placeholder="E-mail"
         data-testid="email"
-        error={!!emailError}
+        error={!!stateError?.email}
       />
       <BoxContent h={16} />
       <Input
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
+        value={state.password}
+        onChange={(e) => appendState({ password: e.target.value })}
         type="password"
         placeholder="Password"
         data-testid="password"
-        error={!!passwordError}
+        error={!!stateError?.password}
       />
       <BoxContent h={40} />
       <Button
@@ -86,6 +103,7 @@ const Login: React.FC<LoginProps> = ({
         loading={isLoading}
         onClick={onSubmit}
       />
+      <Button title="Sign up" onClick={navigateToSignUp} />
       <StatusIndicator />
     </BoxContent>
   );

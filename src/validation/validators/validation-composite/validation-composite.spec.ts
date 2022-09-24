@@ -31,7 +31,7 @@ describe('Validation Composite', () => {
       fieldValidationSpyError2,
     ]);
 
-    const error = sut.validate(fieldName, faker.random.word());
+    const error = sut.validate(fieldName, { [fieldName]: faker.random.word() });
 
     expect(error).toBe(firstErrorMessage);
   });
@@ -47,8 +47,21 @@ describe('Validation Composite', () => {
       fieldValidationSpySuccess2,
     ]);
 
-    const error = sut.validate(fieldName, faker.random.word());
+    const error = sut.validate(fieldName, { [fieldName]: faker.random.word() });
 
     expect(error).toBeNull();
+  });
+
+  it('should call field validation correctly', async () => {
+    const fieldName = faker.database.column();
+    const input = await JSON.parse(faker.datatype.json());
+
+    const fieldValidationSpy = new FieldValidationSpy(fieldName);
+
+    const { sut } = makeSut([fieldValidationSpy]);
+
+    sut.validate(fieldName, input);
+
+    expect(fieldValidationSpy.input).toEqual(input);
   });
 });

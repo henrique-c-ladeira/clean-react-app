@@ -14,6 +14,8 @@ type SutTypes = {
   validationSpy: ValidationSpy;
 };
 
+jest.mock('react-router-dom', () => ({ useNavigate: jest.fn() }));
+
 // TODO - add tests for authentication and saveAccessToken
 // and remove Spy from this file
 class AuthenticationSpy implements Authentication {
@@ -59,12 +61,8 @@ describe('Login Component', () => {
     const password = faker.internet.password();
 
     fireEvent.input(emailInput, { target: { value: email } });
-    expect(validationSpy.fieldName).toEqual('email');
-    expect(validationSpy.fieldValue).toEqual(email);
-
     fireEvent.input(passwordInput, { target: { value: password } });
-    expect(validationSpy.fieldName).toEqual('password');
-    expect(validationSpy.fieldValue).toEqual(password);
+    expect(validationSpy.input).toEqual({ email, password });
   });
 
   it('should render validation success if email and password input correctly', () => {

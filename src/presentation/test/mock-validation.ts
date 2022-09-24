@@ -4,11 +4,11 @@ import { Validation } from '../contracts/validation';
 export class ValidationSpy implements Validation {
   errorMessage: string | null = 'error';
   fieldName?: string;
-  fieldValue?: string;
+  input?: Record<string, string>;
 
-  validate(fieldName: string, fieldValue: string) {
+  validate(fieldName: string, input: Record<string, string>) {
     this.fieldName = fieldName;
-    this.fieldValue = fieldValue;
+    this.input = input;
     return this.errorMessage;
   }
 }

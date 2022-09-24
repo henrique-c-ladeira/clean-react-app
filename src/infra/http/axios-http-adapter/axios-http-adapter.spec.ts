@@ -44,4 +44,22 @@ describe('AxiosHttpAdapter', () => {
     const promise = sut.post(mockPostRequest());
     expect(promise).toEqual(axiosMock.post.mock.results[0].value);
   });
+
+  it('should return correct statusCode and body on failure with no response data', async () => {
+    const { sut, axiosMock } = makeSut();
+    const axiosResultMock = {
+      status: faker.random.numeric(),
+    };
+    axiosMock.post.mockImplementation(() =>
+      Promise.reject({ response: axiosResultMock })
+    );
+    const promise = sut.post(mockPostRequest());
+    expect(promise).toEqual(axiosMock.post.mock.results[0].value);
+  });
+  it('should return correct statusCode and body on failure with nothing on repsonse', async () => {
+    const { sut, axiosMock } = makeSut();
+    axiosMock.post.mockImplementation(() => Promise.reject());
+    const promise = sut.post(mockPostRequest());
+    expect(promise).toEqual(axiosMock.post.mock.results[0].value);
+  });
 });
