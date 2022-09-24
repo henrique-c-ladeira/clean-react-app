@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { HttpPostClient, HttpPostParams } from '~/data/contracts/http';
 
-export class AxiosHttpAdapter implements HttpPostClient<unknown, unknown> {
+export class AxiosPostHttpAdapter implements HttpPostClient<unknown, unknown> {
   async post(params: HttpPostParams<unknown>) {
     try {
       const httpResponse = await axios.post(params.url, params.body);
