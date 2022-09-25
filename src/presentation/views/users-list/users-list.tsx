@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { LoadUsers } from '~/domain/usecases/load-users';
 import { BoxContent, Button, Typography } from '~/presentation/components';
 import { Card } from '~/presentation/components/card/card';
+import usePromiseState from '~/presentation/hooks/usePromiseState';
+import { ProjectCard } from './project-card';
 
 type UserListProps = {
   loadUsers: LoadUsers;
@@ -10,13 +12,11 @@ type UserListProps = {
 
 export const UsersList: React.FC<UserListProps> = ({ loadUsers }) => {
   const navigate = useNavigate();
-  const [usersList, setUsersList] = useState<LoadUsers.Return>();
+
+  const { data: usersList, exec } = usePromiseState(() => loadUsers.load());
 
   useEffect(() => {
-    (async () => {
-      const usersList = await loadUsers.load();
-      setUsersList(usersList);
-    })();
+    exec();
   }, []);
 
   const logOut = () => {
@@ -33,21 +33,8 @@ export const UsersList: React.FC<UserListProps> = ({ loadUsers }) => {
           <Typography variant="heading">Users List</Typography>
           <Button inverted title="Logout" onClick={logOut} />
         </BoxContent>
-        <Card center>
-          <Typography variant="bodySmall">
-            This is an open source project <br />
-            focused on clean architecture
-          </Typography>
-          <BoxContent h={10} />
-          <Button
-            title="GitHub Project"
-            onClick={() =>
-              window.location.assign(
-                'https://github.com/henrique-c-ladeira/clean-react-app'
-              )
-            }
-          />
-        </Card>
+
+        <ProjectCard />
       </BoxContent>
 
       <BoxContent

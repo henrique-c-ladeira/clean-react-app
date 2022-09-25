@@ -20,11 +20,6 @@ describe('Users List', () => {
     const { sut } = makeSut();
 
     await waitFor(() => {
-      expect(
-        sut.getByText(
-          /This is an open source project focused on clean architecture/
-        )
-      );
       expect(sut.getByText(/Users List/));
     });
   });
