@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { TypographySC } from './typography.styled';
 
-type Variants = 'bodySmall' | 'bodyRegular' | 'heading' | 'subHeading';
+type Variants =
+  | 'bodySmall'
+  | 'bodyTiny'
+  | 'bodyRegular'
+  | 'heading'
+  | 'subHeading';
 
 export interface TypographyProps {
-  children: string;
+  children: string | ReactNode;
   variant?: Variants;
   'data-testid'?: string;
 }

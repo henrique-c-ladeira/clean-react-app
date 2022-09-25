@@ -9,7 +9,11 @@ const centerStyle = css`
 
 export const BoxContentSC = styled.div<BoxContentProps>`
   display: flex;
-  flex-direction: column;
+  flex-direction: ${(props) => (props.inline ? 'row' : 'column')};
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: baseline;
+  text-align: left;
   ${(props) => props.center && centerStyle}
 
   ${(props) => props.fillVertical && 'min-height: 100vh;'}

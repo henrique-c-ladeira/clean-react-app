@@ -60,6 +60,7 @@ const Login: React.FC<LoginProps> = ({
       });
       console.log(result);
       await saveAccessToken.save(result.accessToken);
+      navigateToUsersList();
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       console.log(err?.message);
@@ -71,12 +72,17 @@ const Login: React.FC<LoginProps> = ({
   const navigateToSignUp = () => {
     navigate('/signup');
   };
+  const navigateToUsersList = () => {
+    navigate('/users-list');
+  };
 
   return (
     <BoxContent center fillVertical>
       <Switch active={active} onToggle={() => setActive((prev) => !prev)} />
+
       <BoxContent h={16} />
       <Typography variant="heading">Login</Typography>
+
       <BoxContent h={16} />
       <Input
         value={state.email}
@@ -95,15 +101,19 @@ const Login: React.FC<LoginProps> = ({
         data-testid="password"
         error={!!stateError?.password}
       />
-      <BoxContent h={40} />
-      <Button
-        title="Submit"
-        data-testid="submit-button"
-        disabled={isAnyError}
-        loading={isLoading}
-        onClick={onSubmit}
-      />
-      <Button title="Sign up" onClick={navigateToSignUp} />
+      <BoxContent h={32} />
+
+      <BoxContent inline>
+        <Button title="Sign up" onClick={navigateToSignUp} />
+        <BoxContent w={24} />
+        <Button
+          title="Submit"
+          data-testid="submit-button"
+          disabled={isAnyError}
+          loading={isLoading}
+          onClick={onSubmit}
+        />
+      </BoxContent>
       <StatusIndicator />
     </BoxContent>
   );

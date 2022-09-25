@@ -4,6 +4,7 @@ import { BoxContentSC } from './box-content.styled';
 export interface BoxContentProps extends React.HTMLAttributes<HTMLDivElement> {
   center?: boolean;
   fillVertical?: boolean;
+  inline?: boolean;
   w?: number;
   h?: number;
 }
