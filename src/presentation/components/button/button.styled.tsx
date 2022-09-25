@@ -15,6 +15,7 @@ export const ButtonSC = styled.button<ButtonProps>`
       css`
         cursor: pointer;
       `}
+    user-select: none;
   }
 
   &:active {
