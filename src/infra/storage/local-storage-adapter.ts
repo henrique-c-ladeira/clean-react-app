@@ -5,7 +5,7 @@ export class LocalStorageAdapter implements Storage {
     localStorage.setItem(key, value);
   }
 
-  async get(key: string): Promise<void> {
-    localStorage.getItem(key);
+  async get(key: string): Promise<any> {
+    return localStorage.getItem(key);
   }
 }
