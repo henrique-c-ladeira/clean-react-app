@@ -6,6 +6,7 @@ export class AxiosGetHttpAdapter implements HttpGetClient<unknown, unknown> {
     try {
       const httpResponse = await axios.get(params.url, {
         params: params.queryStringUrl,
+        headers: params.headers,
       });
       return {
         statusCode: httpResponse.status,

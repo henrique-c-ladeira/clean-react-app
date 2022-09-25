@@ -28,6 +28,7 @@ describe('AxiosGetHttpAdapter', () => {
     sut.get(request);
     expect(axiosMock.get).toHaveBeenCalledWith(request.url, {
       params: request.queryStringUrl,
+      headers: request.headers,
     });
   });
 
