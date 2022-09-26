@@ -19,6 +19,9 @@ const GlobalStyle = createGlobalStyle`
     font: inherit;
     line-height: normal;
   }
+  html {
+    width: 100vw;
+}
 
   body {
     margin: 0;

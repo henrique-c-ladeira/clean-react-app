@@ -9,6 +9,7 @@ import StatusIndicator from '~/presentation/components/status-indicator/status-i
 import { useStateWithValidation } from '~/presentation/hooks';
 import { Validation } from '~/presentation/contracts/validation';
 import { AddAccount } from '~/domain/usecases';
+import { useNavigate } from 'react-router-dom';
 
 type SignUpProps = {
   validation: Validation;
@@ -30,6 +31,7 @@ const initialState: SignUpState = {
 };
 
 const SignUp: React.FC<SignUpProps> = ({ validation, signUp }) => {
+  const navigate = useNavigate();
   const [state, setState, stateError] = useStateWithValidation<SignUpState>(
     initialState,
     validation
@@ -47,12 +49,17 @@ const SignUp: React.FC<SignUpProps> = ({ validation, signUp }) => {
     try {
       setIsLoading(true);
       await signUp.add(state);
+      navigate('/login');
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       console.log(err?.message);
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const navigateToLogin = () => {
+    navigate('/');
   };
 
   return (
@@ -102,14 +109,18 @@ const SignUp: React.FC<SignUpProps> = ({ validation, signUp }) => {
       />
 
       <BoxContent h={40} />
-      <Button
-        title="Submit"
-        data-testid="submit-button"
-        // disabled={isAnyError}
-        loading={isLoading}
-        onClick={onSubmit}
-      />
-      <StatusIndicator />
+
+      <BoxContent inline>
+        <Button inverted title="Back" onClick={navigateToLogin} />
+        <BoxContent w={24} />
+        <Button
+          title="Submit"
+          data-testid="submit-button"
+          // disabled={isAnyError}
+          loading={isLoading}
+          onClick={onSubmit}
+        />
+      </BoxContent>
     </BoxContent>
   );
 };

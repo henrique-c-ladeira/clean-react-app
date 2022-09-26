@@ -3,6 +3,7 @@ import { AbsoluteBoxContentSC } from './box-content.styled';
 
 export interface AbsoluteBoxContentProps
   extends React.HTMLAttributes<HTMLDivElement> {
+  position?: string;
   r?: number;
   l?: number;
   t?: number;

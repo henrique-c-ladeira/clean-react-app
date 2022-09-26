@@ -1,9 +1,6 @@
 import { faker } from '@faker-js/faker';
 import { AccountModel } from '~/domain/models';
-import {
-  Authentication,
-  AuthenticationParams,
-} from '~/domain/usecases/authentication';
+import { Authentication } from '~/domain/usecases/authentication';
 import { SaveAccessToken } from '~/domain/usecases/save-access-token';
 import { ValidationSpy } from '~/presentation/test';
 import { cleanup, fireEvent, render, RenderResult } from '~/shared/tests-utils';
@@ -19,7 +16,7 @@ jest.mock('react-router-dom', () => ({ useNavigate: jest.fn() }));
 // TODO - add tests for authentication and saveAccessToken
 // and remove Spy from this file
 class AuthenticationSpy implements Authentication {
-  auth(params: AuthenticationParams): Promise<AccountModel> {
+  auth(params: Authentication.Params): Promise<AccountModel> {
     return Promise.resolve({ accessToken: 'mock' });
   }
 }

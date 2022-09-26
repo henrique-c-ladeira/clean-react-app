@@ -1,20 +1,23 @@
-import { AxiosHttpAdapter } from './axios-http-adapter';
-import { mockAxiosPost } from '~/infra/test';
+import { AxiosPostHttpAdapter } from './axios-post-http-adapter';
+import { mockAxiosResponse } from '~/infra/test';
 import { mockPostRequest } from '~/data/test';
 import axios from 'axios';
 import { faker } from '@faker-js/faker';
 
 jest.mock('axios');
 
-type SutTypes = { sut: AxiosHttpAdapter; axiosMock: jest.Mocked<typeof axios> };
+type SutTypes = {
+  sut: AxiosPostHttpAdapter;
+  axiosMock: jest.Mocked<typeof axios>;
+};
 
 const makeSut = (): SutTypes => {
-  const sut = new AxiosHttpAdapter();
-  const axiosMock = mockAxiosPost();
+  const sut = new AxiosPostHttpAdapter();
+  const axiosMock = mockAxiosResponse();
   return { sut, axiosMock };
 };
 
-describe('AxiosHttpAdapter', () => {
+describe('AxiosPostHttpAdapter', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });

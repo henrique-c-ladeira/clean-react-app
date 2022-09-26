@@ -1,7 +1,11 @@
-import { SetStorage } from '~/data/contracts/storage/set-storage';
+import { Storage } from '~/data/contracts/storage/storage';
 
-export class LocalStorageAdapter implements SetStorage {
+export class LocalStorageAdapter implements Storage {
   async set(key: string, value: any): Promise<void> {
     localStorage.setItem(key, value);
+  }
+
+  async get(key: string): Promise<any> {
+    return localStorage.getItem(key);
   }
 }
