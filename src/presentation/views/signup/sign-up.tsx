@@ -49,6 +49,7 @@ const SignUp: React.FC<SignUpProps> = ({ validation, signUp }) => {
     try {
       setIsLoading(true);
       await signUp.add(state);
+      navigate('/login');
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       console.log(err?.message);
