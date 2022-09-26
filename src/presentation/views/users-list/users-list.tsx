@@ -1,7 +1,13 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LoadUsers } from '~/domain/usecases/load-users';
-import { BoxContent, Button, Typography } from '~/presentation/components';
+import {
+  BoxContent,
+  Button,
+  FallbackWrapper,
+  Typography,
+} from '~/presentation/components';
+import AbsoluteBoxContent from '~/presentation/components/box-content/absolute-box-content';
 import usePromiseState from '~/presentation/hooks/usePromiseState';
 import { ProjectCard } from './project-card';
 import { UserCard } from './user-card';
@@ -13,7 +19,11 @@ type UserListProps = {
 export const UsersList: React.FC<UserListProps> = ({ loadUsers }) => {
   const navigate = useNavigate();
 
-  const { data: usersList, exec } = usePromiseState(() => loadUsers.load());
+  const {
+    data: usersList,
+    exec,
+    status,
+  } = usePromiseState(() => loadUsers.load());
 
   useEffect(() => {
     exec();
@@ -23,30 +33,33 @@ export const UsersList: React.FC<UserListProps> = ({ loadUsers }) => {
     navigate('/');
   };
 
+  const renderSuccess = () => (
+    <>
+      {usersList?.map((user) => (
+        <UserCard user={user} />
+      ))}
+    </>
+  );
+
   return (
-    <BoxContent inline style={{ justifyContent: 'center' }}>
-      <BoxContent style={{ position: 'sticky', top: 0 }}>
-        <BoxContent
-          inline
-          style={{ justifyContent: 'space-between', width: '100%' }}
-        >
+    <BoxContent inline justify="center">
+      <AbsoluteBoxContent position="sticky" t={0}>
+        <BoxContent inline justify="space-between" style={{ width: '100%' }}>
           <Typography variant="heading">Users List</Typography>
           <Button inverted title="Logout" onClick={logOut} />
         </BoxContent>
 
         <ProjectCard />
-      </BoxContent>
-
+        <Button title="a" onClick={exec} />
+      </AbsoluteBoxContent>
       <BoxContent
+        align="stretch"
         style={{
-          alignItems: 'stretch',
           marginLeft: 24,
           gap: 8,
         }}
       >
-        {usersList?.map((user) => (
-          <UserCard user={user} />
-        ))}
+        <FallbackWrapper renderSuccess={renderSuccess} status={status} />
       </BoxContent>
     </BoxContent>
   );
