@@ -5,6 +5,8 @@ export interface BoxContentProps extends React.HTMLAttributes<HTMLDivElement> {
   center?: boolean;
   fillVertical?: boolean;
   inline?: boolean;
+  justify?: string;
+  align?: string;
   w?: number;
   h?: number;
 }
